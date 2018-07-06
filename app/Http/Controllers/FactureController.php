@@ -292,7 +292,7 @@ $facture->save();
     }
     public function werehouse()
     {
-        $factures = Facture::with('customer')->orderBy('uid','ASC')->where('st',0)->get();
+        $factures = Facture::with('customer')->orderBy('uid','ASC')->get();
         return view('factures.werhouse',compact('factures'));
     
     }

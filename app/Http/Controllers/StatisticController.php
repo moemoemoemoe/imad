@@ -160,7 +160,7 @@ $factures->save();
         $myString = $ids;
 $myArray = explode(',', $myString);
 // print_r($myArray);
-$factures = Facture::whereIn('id', $myArray)->get();
+$factures = Facture::whereIn('id', $myArray)->orderBy('uid','ASC')->get();
 //return $result;
 
  if(count($factures) == 0)
@@ -195,9 +195,36 @@ $factures = Facture::whereIn('id', $myArray)->get();
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function print_selected_drivers($ids)
     {
-        //
+              $myString = $ids;
+$myArray = explode(',', $myString);
+// print_r($myArray);
+$factures = Facture::whereIn('id', $myArray)->with('customer')->orderBy('uid','ASC')->get();
+//return $result;
+
+ if(count($factures) == 0)
+        {
+            return Redirect::Back()->withErrors('No Factures selected');
+
+        }
+        else{
+
+            $total_amount = 0;
+            $total_collected = 0;
+            $total_shipping = 0;
+             $total_net_amount = 0;
+
+            for($i=0;$i<count($factures);$i++)
+            {
+                $total_amount = $total_amount  + $factures[$i]->amount;
+                $total_collected = $total_collected  + $factures[$i]->collected;
+                $total_shipping = $total_shipping  + $factures[$i]->rate;
+                $total_net_amount = $total_net_amount  + $factures[$i]->net_amount;
+
+            }
+    return view('statistic.driver_checked',compact('factures','total_amount','total_collected','total_shipping','total_net_amount'));
+    }
     }
 
     /**

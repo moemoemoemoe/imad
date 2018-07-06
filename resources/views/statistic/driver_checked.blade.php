@@ -68,28 +68,26 @@
                     <td style="width: 5%;font-weight: bold;">Amount LL</td> 
                     <td style="width: 5%;font-weight: bold;">Date</td>
                     <td class="a" style="width: 5%;font-weight: bold;">Option1</td> 
-                    <td class="a" style="width: 5%;font-weight: bold;">Option2</td>
                 </tr>    
-                @foreach($details  as $facture)
+                @foreach($factures  as $facture)
                 <tr>
-                   <td style="width: 5%">{{$facture->facture_id}}</td>
+                   <td style="width: 5%">{{$facture->uid}}</td>
                    <td style="width: 10%">{{$facture->customer->name}}</td>
-                   <td style="width: 5%">{{$facture->facture->client_name}}</td> 
-                   <td style="width: 10%">{{$facture->facture->full_address}}</td>
-@if($facture->facture->status == 1)
+                   <td style="width: 5%">{{$facture->client_name}}</td> 
+                   <td style="width: 10%">{{$facture->full_address}}</td>
+@if($facture->status == 1)
                    <td style="width: 5%">عادي </td>
                    @else
                    <td style="width: 5%">تبديل وترجيع  </td>
                    @endif
 
-                   <td style="width: 5%">{{$facture->facture->phone_number}}</td>
-                   <td style="width: 5%">${{$facture->facture->amount}}</td> 
-                   <td style="width: 5%"><?php echo $facture->facture->amount*1500; ?></td>
-                <td style="width: 5%">{{($facture->facture->created_at)}}</td> 
+                   <td style="width: 5%">{{$facture->phone_number}}</td>
+                   <td style="width: 5%">${{$facture->amount}}</td> 
+                   <td style="width: 5%"><?php echo $facture->amount*1500; ?></td>
+                <td style="width: 5%">{{($facture->created_at)}}</td> 
 
-                   <td class="a" style="width: 5%"><a href="{{route('edit_facture', $facture->facture->id)}}" style="text-decoration: none;">Edit</a></td> 
-                   
-                   <td style="width: 5%" class="b"><input type="checkbox" class="form-controll" name="check_box_1[]" value="{{$facture->facture->id}}" /></td>
+                   <td class="a" style="width: 5%"><a href="{{route('edit_facture', $facture->id)}}" style="text-decoration: none;">Edit</a></td> 
+                 
 
                </tr>    
 
@@ -97,12 +95,7 @@
 
 
            </table>
-            <table style="width: 100%">
-          
-          <tr><td style="width: 100%;text-align: center;">
-            <div style="width: 100%"><span onclick="getLoc()" style="width: 100%" class="form-controll btn btn-primary a" >Print Selected</span></div>
-          </td></tr>
-        </table>
+           
 
        </div>
      </div>
@@ -116,8 +109,6 @@
     {
 
          $('.a').hide();
-                  $('.b').hide();
-
 
     
      var divToPrint = document.getElementById('print');
@@ -126,19 +117,7 @@
      popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
      popupWin.document.close();
    }
-     function getLoc(){
-   var checkboxes = document.getElementsByName('check_box_1[]');
-var vals = "";
-for (var i=0, n=checkboxes.length;i<n;i++) 
-{
-    if (checkboxes[i].checked) 
-    {
-        vals += ","+checkboxes[i].value;
-    }
-}
-//alert('localhost/imad/public/print_selected/'+vals.substring(1));
-window.location.href='print_selected_drivers/'+vals.substring(1);
-}
+    
 </script>
 
 @endsection

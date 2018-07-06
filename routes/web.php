@@ -79,6 +79,7 @@ Route::get('driver_factures/{id}', ['as' => 'driver_factures', 'uses' => 'Statis
 Route::post('edit_facture_dri/{id}', ['as' => 'edit_facture_dri', 'uses' => 'StatisticController@edit_facture_dri']);
 
 Route::get('customer_factures/print_selected/{ids}', ['as' => 'print_selected', 'uses' => 'StatisticController@print_selected']);
+Route::get('driver_factures/print_selected_drivers/{ids}', ['as' => 'print_selected_drivers', 'uses' => 'StatisticController@print_selected_drivers']);
 
 ///////////////////Search Controller
 Route::get('search', ['as' => 'search', 'uses' => 'SearchController@index']);
