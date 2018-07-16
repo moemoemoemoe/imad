@@ -56,7 +56,7 @@
                 <td style="width: 5%">{{($facture->created_at)}}</td> 
 
 <td style="width: 5%"><a href="{{route('edit_facture', $facture->id)}}" style="text-decoration: none;" class="btn btn-primary" >Edit</a></td> 
-
+@if($facture->is_printed == 0)
 @if($facture->st == 0)
 <td style="width: 5%"><a href="{!!route('detail_facture',[$facture->uid,$facture->customer_id,$facture->zone_id]) !!}" style="text-decoration: none;" class="btn btn-primary">Check Out</a></td>
 @else
@@ -75,6 +75,12 @@
 <td style="width: 5%"><a href="#" style="text-decoration: none;" class="btn btn-danger">Paid</a></td>
 @else
 <td style="width: 5%"><a href="{{route('paid_facture', $facture->id)}}" style="text-decoration: none;" class="btn btn-primary">Paid</a></td>
+@endif
+@else
+<td style="width: 5%"><a href="#" style="text-decoration: none;" class="btn btn-success">closed</a></td>
+<td style="width: 5%"><a href="#" style="text-decoration: none;" class="btn btn-success">closed</a></td>
+<td style="width: 5%"><a href="#" style="text-decoration: none;" class="btn btn-success">closed</a></td>
+
 @endif
 
 

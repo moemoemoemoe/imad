@@ -82,7 +82,7 @@
                 <br/><br/>
         
            
-         <a href="{{route('delete_driver', $driver->id)}}" class="btn btn-danger form-control">Delete!!</a>
+        <!--  <a href="{{route('delete_driver', $driver->id)}}" class="btn btn-danger form-control">Delete!!</a> -->
            
         </div>
     </div>

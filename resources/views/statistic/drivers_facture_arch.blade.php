@@ -92,7 +92,7 @@
                    <td style="width: 5%"><?php echo $facture->facture->amount*1500; ?></td>
                 <td style="width: 5%">{{($facture->facture->created_at)}}</td> 
 
-                   <td style="width: 5%"><a href="{{route('edit_facture', $facture->facture->id)}}" style="text-decoration: none;" class="btn btn-primary" >Edit</a></td> 
+                   <td style="width: 5%"><a href="{{route('edit_facture', $facture->id)}}" style="text-decoration: none;" class="btn btn-primary" >Edit</a></td> 
 
 @if($facture->facture->st == 0)
 <td style="width: 5%"><a href="{!!route('detail_facture',[$facture->facture->uid,$facture->facture->customer_id,$facture->facture->zone_id]) !!}" style="text-decoration: none;" class="btn btn-primary">Check Out</a></td>
@@ -122,7 +122,7 @@
 
 
            </table>
-            <table style="width: 100%">
+         <!--    <table style="width: 100%">
           
           <tr>
             <td style="width: 100%;text-align: center;">
@@ -133,12 +133,8 @@
             <td style="width: 100%;text-align: center;">
             <div style="width: 100%"><span onclick="getLocClose()" style="width: 100%" class="form-controll btn btn-success a" >Print Selected & Close</span></div>
           </td></tr>
-           <tr>
-            <td style="width: 100%;text-align: center;">
-            <div style="width: 100%"><span onclick="getLocCloseSelected()" style="width: 100%" class="form-controll btn btn-danger a" > Close Selected</span></div>
-          </td></tr>
         </table>
-
+ -->
        </div>
      </div>
    </div>
@@ -161,45 +157,20 @@
      popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
      popupWin.document.close();
    }
-     function getLoc(){
-   var checkboxes = document.getElementsByName('check_box_1[]');
-var vals = "";
-for (var i=0, n=checkboxes.length;i<n;i++) 
-{
-    if (checkboxes[i].checked) 
-    {
-        vals += ","+checkboxes[i].value;
-    }
-}
-//alert('localhost/imad/public/print_selected/'+vals.substring(1));
-window.location.href='print_selected_drivers/'+vals.substring(1);
-}
-     function getLocClose(){
-   var checkboxes = document.getElementsByName('check_box_1[]');
-var vals = "";
-for (var i=0, n=checkboxes.length;i<n;i++) 
-{
-    if (checkboxes[i].checked) 
-    {
-        vals += ","+checkboxes[i].value;
-    }
-}
-//alert('localhost/imad/public/print_selected/'+vals.substring(1));
-window.location.href='print_selected_drivers_close/'+vals.substring(1);
-}
-     function getLocCloseSelected(){
-   var checkboxes = document.getElementsByName('check_box_1[]');
-var vals = "";
-for (var i=0, n=checkboxes.length;i<n;i++) 
-{
-    if (checkboxes[i].checked) 
-    {
-        vals += ","+checkboxes[i].value;
-    }
-}
-//alert('localhost/imad/public/print_selected/'+vals.substring(1));
-window.location.href='print_selected_drivers_close_selected/'+vals.substring(1);
-}
+//      function getLoc(){
+//    var checkboxes = document.getElementsByName('check_box_1[]');
+// var vals = "";
+// for (var i=0, n=checkboxes.length;i<n;i++) 
+// {
+//     if (checkboxes[i].checked) 
+//     {
+//         vals += ","+checkboxes[i].value;
+//     }
+// }
+// //alert('localhost/imad/public/print_selected/'+vals.substring(1));
+// window.location.href='print_selected_drivers/'+vals.substring(1);
+// }
+    
 </script>
 
 @endsection

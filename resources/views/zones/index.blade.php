@@ -77,7 +77,7 @@
            
         
            
-         <a href="{{route('delete_zone', $zone->id)}}" class="btn btn-danger form-control">Delete!!</a>
+        <!--  <a href="{{route('delete_zone', $zone->id)}}" class="btn btn-danger form-control">Delete!!</a> -->
            
         </div>
     </div>

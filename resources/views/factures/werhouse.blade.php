@@ -20,7 +20,9 @@
 
             </div>
             <div class="panel panel-default">
-
+<div class="panel panel-default" >
+  <center>{{count($factures)}} facture/s</center>
+</div>
              <table border="1" style="text-align: center;font-weight: 5">
                  <tr>
                     <td style="width: 5%;font-weight: bold;">Order Id</td>

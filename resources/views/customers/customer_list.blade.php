@@ -33,6 +33,8 @@
           <td style="width: 5%;font-weight: bold;">Tel Number</td> 
           <td style="width: 5%;font-weight: bold;">Date</td> 
           <td style="width: 5%;font-weight: bold;">Option 1</td> 
+                    <td style="width: 5%;font-weight: bold;">Option 2</td> 
+
         </tr>    
         @foreach($customers  as $customer)
         <tr>
@@ -41,7 +43,8 @@
          <td style="width: 10%">{{$customer->address}}</td>
          <td style="width: 5%">{{$customer->phone_number}}</td>
          <td style="width: 5%">{{$customer->created_at}}</td> 
-         <td style="width: 5%"><a href="{{route('customer_factures', $customer->id)}}" style="text-decoration: none;">View Factures</a></td>
+         <td style="width: 5%"><a  class="btn btn-primary" href="{{route('customer_factures', $customer->id)}}" style="text-decoration: none;">View Factures</a></td>
+            <td style="width: 5%"><a " href="{{route('customer_factures_archived', $customer->id)}}" style="text-decoration: none;">Archived</a></td>
 
        </tr>    
 

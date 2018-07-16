@@ -292,7 +292,7 @@ $facture->save();
     }
     public function werehouse()
     {
-        $factures = Facture::with('customer')->orderBy('uid','ASC')->get();
+        $factures = Facture::with('customer')->orderBy('uid','ASC')->where('st',0)->get();
         return view('factures.werhouse',compact('factures'));
     
     }
@@ -319,10 +319,13 @@ $facture->save();
      $driver_uid = $r->input('driver_id');
 
         $check_box  = Session::get('check_box');
+ //return $check_box[0];
         for($i=0;$i<count($check_box);$i++)
              {
 $drivers_exist = Detail::where('f_id',$check_box[$i])->get();
+
 $factures = Facture::where('id',$check_box[$i])->get();
+
 
 if(count($drivers_exist) == 0)
 {
@@ -332,6 +335,7 @@ if(count($drivers_exist) == 0)
         $detail->driver_id = $driver_uid;
          $detail->customer_id = $factures[0]->customer_id;
         $detail->zone_id = $factures[0]->zone_id;
+        $detail->is_printed = 0;
         $detail->save();
 
         $fact =Facture::findOrFail($check_box[$i]);
@@ -342,12 +346,15 @@ if(count($drivers_exist) == 0)
 
 }
 else{
-  $detail =Detail::findOrFail($check_box[$i]);
-      $detail->driver_id = $driver_uid;
-      $detail->save();
-       $fact =Facture::findOrFail($check_box[$i]);
-        $fact->st = 1;
-        $fact->save();
+ //return $check_box[$i];
+  $details =Detail::findOrFail($drivers_exist[0]->id);
+// return $details;
+      $details->driver_id = $driver_uid;
+      $details->save();
+       $facts =Facture::findOrFail($check_box[$i]);
+// return $fact;
+        $facts->st = 1;
+        $facts->save();
 
 
 }
@@ -360,5 +367,5 @@ else{
 
     
     
-}
+ }
 }

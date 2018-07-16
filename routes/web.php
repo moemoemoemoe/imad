@@ -67,7 +67,7 @@ Route::get('search', ['as' => 'search', 'uses' => 'SearchController@index']);
 
 ///////////////////Statistics
 
-
+Route::get('customer_factures_archived/{id}', ['as' => 'customer_factures_archived', 'uses' => 'StatisticController@customer_factures_archived']);
 Route::get('customer_factures/{id}', ['as' => 'customer_factures', 'uses' => 'StatisticController@customer_factures']);
 
 
@@ -76,10 +76,18 @@ Route::post('customer_factures/{id}', ['as' => 'customer_factures', 'uses' => 'S
 
 Route::get('driver_factures/{id}', ['as' => 'driver_factures', 'uses' => 'StatisticController@driver_factures']);
 
+Route::get('driver_factures_arch/{id}', ['as' => 'driver_factures_arch', 'uses' => 'StatisticController@driver_factures_arch']);
+
 Route::post('edit_facture_dri/{id}', ['as' => 'edit_facture_dri', 'uses' => 'StatisticController@edit_facture_dri']);
 
 Route::get('customer_factures/print_selected/{ids}', ['as' => 'print_selected', 'uses' => 'StatisticController@print_selected']);
+Route::get('customer_factures/print_selected_close/{ids}', ['as' => 'print_selected_close', 'uses' => 'StatisticController@print_selected_close']);
+
 Route::get('driver_factures/print_selected_drivers/{ids}', ['as' => 'print_selected_drivers', 'uses' => 'StatisticController@print_selected_drivers']);
+
+Route::get('driver_factures/print_selected_drivers_close/{ids}', ['as' => 'print_selected_drivers_close', 'uses' => 'StatisticController@print_selected_drivers_close']);
+
+Route::get('driver_factures/print_selected_drivers_close_selected/{ids}', ['as' => 'print_selected_drivers_close_selected', 'uses' => 'StatisticController@print_selected_drivers_close_selected']);
 
 ///////////////////Search Controller
 Route::get('search', ['as' => 'search', 'uses' => 'SearchController@index']);

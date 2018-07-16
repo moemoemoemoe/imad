@@ -21,6 +21,7 @@
             </div>
             
  <div class="panel-heading" style="text-align: center">
+  @if(\Request::route()->getName() == 'customer_factures')
         <form method="POST" enctype="multipart/form-data" class="well">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -41,6 +42,8 @@
 
           </form>
 <hr/>
+@else
+@endif
 <center><button class="btn btn-primary" style="width: 100%" onclick="print()">Print</button></center>  
 <hr/>
 
@@ -75,6 +78,11 @@
                      <td style="width: 10%;font-weight: bold;">Net Amount $</td> 
                     <td style="width: 10%;font-weight: bold;" class="a">Option1</td>
            <td style="width: 5%;font-weight: bold;" class="a">Option2</td>
+           @if(\Request::route()->getName() == 'customer_factures_archived')
+                               <td style="width: 10%;font-weight: bold;" class="a">status</td>
+
+           @else
+           @endif
 
                     
                    <!--  <td style="width: 5%;font-weight: bold;">Option1</td> 
@@ -126,6 +134,17 @@
 <!--   <a href="{{route('edit_facture', $facture->id)}}" style="text-decoration: none;" class="btn btn-primary">Update</a></td> -->
 </td>
 <td style="width: 5%" class="b"><input type="checkbox" class="form-controll" name="check_box_1[]" value="{{$facture->id}}" /></td> 
+ @if(\Request::route()->getName() == 'customer_factures_archived')
+ @if($facture->is_printed_customer == 1)
+ <td style="width: 10%;font-weight: bold; color: red" class="a">CLOSED</td>
+ @else
+  <td style="width: 10%;font-weight: bold; color: green" class="a">On Hold</td>
+
+ @endif
+
+
+           @else
+           @endif
                  <!--   <td style="width: 5%"><a href="{{route('edit_facture', $facture->id)}}" style="text-decoration: none;">Edit</a></td> 
                    <td style="width: 5%"><a href="" style="text-decoration: none;">Duplicate</a></td> -->
 
@@ -140,6 +159,12 @@
           <tr><td style="width: 100%;text-align: center;">
             <div style="width: 100%"><span onclick="getLoc()" style="width: 100%" class="form-controll btn btn-primary a" >Print Selected</span></div>
           </td></tr>
+          @if(\Request::route()->getName() == 'customer_factures')
+           <tr><td style="width: 100%;text-align: center;">
+            <div style="width: 100%"><span onclick="getLocClose()" style="width: 100%" class="form-controll btn btn-success a" >Print Selected & Close</span></div>
+          </td></tr>
+          @else
+          @endif
         </table>
 
        </div>
@@ -174,6 +199,19 @@ for (var i=0, n=checkboxes.length;i<n;i++)
 }
 //alert('localhost/imad/public/print_selected/'+vals.substring(1));
 window.location.href='print_selected/'+vals.substring(1);
+}
+ function getLocClose(){
+   var checkboxes = document.getElementsByName('check_box_1[]');
+var vals = "";
+for (var i=0, n=checkboxes.length;i<n;i++) 
+{
+    if (checkboxes[i].checked) 
+    {
+        vals += ","+checkboxes[i].value;
+    }
+}
+//alert('localhost/imad/public/print_selected/'+vals.substring(1));
+window.location.href='print_selected_close/'+vals.substring(1);
 }
 </script>
 

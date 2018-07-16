@@ -29,6 +29,8 @@
                     <td style="width: 5%;font-weight: bold;">Tel Number</td> 
                     <td style="width: 5%;font-weight: bold;">Date</td> 
                     <td style="width: 5%;font-weight: bold;">Option 1</td> 
+                 <td style="width: 5%;font-weight: bold;">Option 2</td> 
+
                 </tr>    
                 @foreach($drivers  as $driver)
                 <tr>
@@ -36,7 +38,8 @@
                    <td style="width: 10%">{{$driver->name}}</td>
                    <td style="width: 5%">{{$driver->phone_number}}</td>
                    <td style="width: 5%">{{$driver->created_at}}</td> 
-                   <td style="width: 5%"><a href="{{route('driver_factures', $driver->uid)}}" style="text-decoration: none;">View Factures</a></td>
+                   <td style="width: 5%"><a  class="btn btn-primary" href="{{route('driver_factures', $driver->uid)}}" style="text-decoration: none;">View Factures</a></td>
+                   <td style="width: 5%"><a href="{{route('driver_factures_arch', $driver->uid)}}" style="text-decoration: none;">Archived</a></td>
                    
                </tr>    
 
