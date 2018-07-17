@@ -93,6 +93,9 @@ Route::get('driver_factures/print_selected_drivers_close_selected/{ids}', ['as' 
 Route::get('search', ['as' => 'search', 'uses' => 'SearchController@index']);
 Route::post('search_action/{tag}', ['as' => 'search_action', 'uses' => 'SearchController@search_action']);
 
+Route::get('search_action/checkout_search/{ids}', ['as' => 'checkout_search', 'uses' => 'SearchController@checkout_search']);
+
+Route::post('search_action/checkout_search/{ids}', ['as' => 'checkout_search_assign', 'uses' => 'SearchController@checkout_search_assign']);
 
 
 });

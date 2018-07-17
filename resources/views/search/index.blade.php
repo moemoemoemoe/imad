@@ -36,7 +36,7 @@
                     </form>
                 </div>
             </div>
-
+<!-- 
             <div class="panel panel-default">
                 <div class="panel-heading" style="text-align: center;font-weight: 900;color: red">Search Facture By Customer</div>
 
@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-
+ -->
                 <div class="panel panel-default">
                     <div class="panel-heading" style="text-align: center;font-weight: 900;color: red">Search Fcature by Zone</div>
 
@@ -83,7 +83,7 @@
                 </div>
             </div>
 
-
+<!-- 
             <div class="panel panel-default">
                 <div class="panel-heading" style="text-align: center;font-weight: 900;color: red">Search Fcature by Driver</div>
 
@@ -105,7 +105,7 @@
 
                 </form>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 

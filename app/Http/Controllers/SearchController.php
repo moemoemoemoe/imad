@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,7 +8,7 @@ use App\Customer;
 use App\Driver;
 use App\Detail;
 use Redirect;
-
+use Session;
 
 class SearchController extends Controller
 {
@@ -108,7 +107,7 @@ class SearchController extends Controller
         if($the_tage == 3)
         {
             $input = $r->input('zone_id');
-                $details = Facture::with('customer')->with('zone')->where('zone_id',$input)->get();
+                $details = Facture::with('customer')->with('zone')->where('zone_id',$input)->where('st',0)->get();
         //return $details;
 
         
@@ -184,9 +183,14 @@ class SearchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function checkout_search($ids)
     {
-        //
+
+   Session::put('check_box_search', $ids);
+
+   $drivers = Driver::orderBy('id','DESC')->get();
+
+        return view('search.checkout_search',compact('drivers'));
     }
 
     /**
@@ -195,10 +199,61 @@ class SearchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+  public function checkout_search_assign(Request $r)
     {
-        //
-    }
+        $myString = Session::get('check_box_search');
+$check_box = explode(',', $myString);
+//return $myArray[1];
+ $driver_uid = $r->input('driver_id');
+
+         for($i=0;$i<count($check_box);$i++)
+             {
+$drivers_exist = Detail::where('f_id',$check_box[$i])->get();
+
+$factures = Facture::where('id',$check_box[$i])->get();
+
+
+if(count($drivers_exist) == 0)
+{
+   $detail = new Detail();
+   $detail->f_id = $check_box[$i];
+   $detail->facture_id = $factures[0]->uid;
+   $detail->driver_id = $driver_uid;
+   $detail->customer_id = $factures[0]->customer_id;
+   $detail->zone_id = $factures[0]->zone_id;
+   $detail->is_printed = 0;
+   $detail->save();
+
+   $fact =Facture::findOrFail($check_box[$i]);
+   $fact->st = 1;
+   $fact->save();
+
+       
+
+}
+else{
+ //return $check_box[$i];
+  $details =Detail::findOrFail($drivers_exist[0]->id);
+// return $details;
+      $details->driver_id = $driver_uid;
+      $details->save();
+       $facts =Facture::findOrFail($check_box[$i]);
+// return $fact;
+        $facts->st = 1;
+        $facts->save();
+
+
+}
+
+         
+            }
+
+ return Redirect::Back()->with('success','Factures Is Assigned Successfully');
+
+
+    
+    
+ }
 
     /**
      * Show the form for editing the specified resource.

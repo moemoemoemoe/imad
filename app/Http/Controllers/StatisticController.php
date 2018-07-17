@@ -373,8 +373,9 @@ $factures = Facture::whereIn('id', $myArray)->with('customer')->orderBy('uid','A
          $factures_update = Facture::whereIn('id', $myArray)->update(['is_printed'=>1]);
 $details_update = Detail::whereIn('f_id', $myArray)->update(['is_printed'=>1]);
 
-return  Redirect::Back()->with('success','successfully closed');
     }
+    return Redirect()->route('driver_list');
+
     }
 
     /**

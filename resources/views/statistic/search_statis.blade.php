@@ -88,7 +88,7 @@
                 <td style="width: 5%">{{($facture->created_at)}}</td> 
 
                    <td class="a" style="width: 5%"><a href="{{route('edit_facture', $facture->id)}}" style="text-decoration: none;">Edit</a></td> 
-                   <td style="width: 5%" class="a"><a href="" style="text-decoration: none;">Duplicate</a></td>
+ <td style="width: 5%" class="b"><input type="checkbox" class="form-controll" name="check_box_1[]" value="{{$facture->id}}" /></td>  
 
                </tr>    
 
@@ -96,6 +96,14 @@
 
 
            </table>
+                <table style="width: 100%">
+          
+       
+           <tr><td style="width: 100%;text-align: center;">
+            <div style="width: 100%"><span onclick="checkOut()" style="width: 100%" class="form-controll btn btn-success a" >Checkout</span></div>
+          </td></tr>
+         
+        </table>
 
        </div>
      </div>
@@ -117,6 +125,20 @@
      popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
      popupWin.document.close();
    }
+      function checkOut(){
+   var checkboxes = document.getElementsByName('check_box_1[]');
+  
+var vals = "";
+for (var i=0, n=checkboxes.length;i<n;i++) 
+{
+    if (checkboxes[i].checked) 
+    {
+        vals += ","+checkboxes[i].value;
+    }
+}
+// alert(vals.substring(1));
+window.location.href='checkout_search/'+vals.substring(1);
+}
 </script>
 
 @endsection
